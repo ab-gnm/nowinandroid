@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    alias(libs.plugins.nowinandroid.android.library)
-    alias(libs.plugins.nowinandroid.hilt)
-}
 
-dependencies {
-    implementation(libs.androidx.navigation.compose)
+package com.google.samples.apps.nowinandroid.core.navigation
 
-    implementation(libs.kotlinx.coroutines.core)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.turbine)
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavOptions
+
+interface NiaNavigator<Route, Actions, Properties> {
+    fun navigateToRoute(navController: NavController, navOptions: NavOptions?)
+
+    fun bookmarksScreen(
+        navController: NavController,
+        navGraphBuilder: NavGraphBuilder,
+        actions: Actions,
+        properties: Properties
+    )
 }
