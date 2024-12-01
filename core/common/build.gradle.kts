@@ -18,6 +18,10 @@ plugins {
     alias(libs.plugins.nowinandroid.hilt)
 }
 
+android {
+    namespace = "com.google.samples.apps.nowinandroid.core.common"
+}
+
 dependencies {
     implementation(libs.androidx.navigation.compose)
 

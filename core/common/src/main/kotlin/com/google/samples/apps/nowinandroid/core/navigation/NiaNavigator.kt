@@ -21,9 +21,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 
 interface NiaNavigator<Route, Actions, Properties> {
-    fun navigateToRoute(navController: NavController, navOptions: NavOptions?)
+    fun navigateToRoute(
+        navController: NavController,
+        route: Route,
+        navOptions: NavOptions?,
+    )
 
-    fun bookmarksScreen(
+    fun screen(
         navController: NavController,
         navGraphBuilder: NavGraphBuilder,
         actions: Actions,

@@ -17,17 +17,13 @@
 package com.google.samples.apps.nowinandroid.feature.bookmarks.navigation
 
 import androidx.compose.runtime.Stable
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
+import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator.Actions
 
 @Stable
-interface BookmarksNavigator {
-    fun navigateToBookmarks(navController: NavController, navOptions: NavOptions)
-
-    fun bookmarksScreen(
-        navGraphBuilder: NavGraphBuilder,
-        onTopicClick: (String) -> Unit,
-        onShowSnackbar: suspend (String, String?) -> Boolean,
+interface BookmarksNavigator: NiaNavigator<BookmarksRoute, Actions, Unit> {
+    data class Actions(
+        val onTopicClick: (String) -> Unit,
+        val onShowSnackbar: suspend (String, String?) -> Boolean,
     )
 }

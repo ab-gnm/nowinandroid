@@ -34,6 +34,7 @@ import com.google.samples.apps.nowinandroid.core.data.util.NetworkMonitor
 import com.google.samples.apps.nowinandroid.core.data.util.TimeZoneMonitor
 import com.google.samples.apps.nowinandroid.core.ui.TrackDisposableJank
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
+import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksRoute
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.navigateToForYou
 import com.google.samples.apps.nowinandroid.feature.interests.navigation.navigateToInterests
 import com.google.samples.apps.nowinandroid.feature.search.navigation.navigateToSearch
@@ -161,8 +162,15 @@ class NiaAppState(
 
             when (topLevelDestination) {
                 FOR_YOU -> navController.navigateToForYou(topLevelNavOptions)
-                BOOKMARKS -> bookmarksNavigator.navigateToBookmarks(navController, topLevelNavOptions)
-                INTERESTS -> navController.navigateToInterests(null, topLevelNavOptions)
+                BOOKMARKS -> bookmarksNavigator.navigateToRoute(
+                    navController = navController,
+                    route = BookmarksRoute,
+                    navOptions = topLevelNavOptions
+                )
+                INTERESTS -> navController.navigateToInterests(
+                    initialTopicId = null,
+                    navOptions = topLevelNavOptions
+                )
             }
         }
     }

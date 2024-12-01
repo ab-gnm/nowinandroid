@@ -19,6 +19,7 @@ package com.google.samples.apps.nowinandroid.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseRoute
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.forYouSection
 import com.google.samples.apps.nowinandroid.feature.interests.navigation.navigateToInterests
@@ -57,10 +58,14 @@ fun NiaNavHost(
                 onTopicClick = navController::navigateToTopic,
             )
         }
-        appState.bookmarksNavigator.bookmarksScreen(
+        appState.bookmarksNavigator.screen(
             navGraphBuilder = this,
-            onTopicClick = navController::navigateToInterests,
-            onShowSnackbar = onShowSnackbar,
+            navController = navController,
+            actions = BookmarksNavigator.Actions(
+                onTopicClick = navController::navigateToTopic,
+                onShowSnackbar = onShowSnackbar,
+            ),
+            properties = Unit,
         )
         searchScreen(
             onBackClick = navController::popBackStack,
