@@ -33,3 +33,21 @@ fun NavGraphBuilder.bookmarksScreen(
         BookmarksRoute(onTopicClick, onShowSnackbar)
     }
 }
+
+internal class BookmarksNavigationImpl: BookmarksNavigator {
+    override fun navigateToBookmarks(navController: NavController, navOptions: NavOptions) {
+        navController.navigate(route = BookmarksRoute, navOptions)
+    }
+
+    override fun bookmarksScreen(
+        navGraphBuilder: NavGraphBuilder,
+        onTopicClick: (String) -> Unit,
+        onShowSnackbar: suspend (String, String?) -> Boolean,
+    ) {
+        with (navGraphBuilder) {
+            composable<BookmarksRoute> {
+                BookmarksRoute(onTopicClick, onShowSnackbar)
+            }
+        }
+    }
+}
