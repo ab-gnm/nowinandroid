@@ -16,9 +16,11 @@
 
 package com.google.samples.apps.nowinandroid.feature.foryou.di
 
+import com.google.samples.apps.nowinandroid.core.navigation.NiaBaseNavigator
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigatorImpl
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseRoute
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,9 +31,12 @@ import dagger.multibindings.IntoMap
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface ForYouSingletonModule {
+    @Binds
+    @IntoMap @ClassKey(ForYouBaseRoute::class)
+    fun bindsForYouBaseNavigator(impl: ForYouBaseNavigator): NiaBaseNavigator<*, *, *>
+
     companion object {
         @Provides
-        @IntoMap @ClassKey(ForYouBaseRoute::class)
         fun providesForYouBaseNavigator(): ForYouBaseNavigator = ForYouBaseNavigatorImpl()
     }
 }
