@@ -41,6 +41,7 @@ import com.google.samples.apps.nowinandroid.core.data.util.NetworkMonitor
 import com.google.samples.apps.nowinandroid.core.data.util.TimeZoneMonitor
 import com.google.samples.apps.nowinandroid.core.designsystem.theme.NiaTheme
 import com.google.samples.apps.nowinandroid.core.testing.util.DefaultRoborazziOptions
+import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.uitesthiltmanifest.HiltComponentActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -98,6 +99,9 @@ class SnackbarScreenshotTests {
 
     @Inject
     lateinit var userNewsResourceRepository: UserNewsResourceRepository
+
+    @Inject
+    lateinit var bookmarksNavigator: BookmarksNavigator
 
     @Before
     fun setup() {
@@ -205,6 +209,7 @@ class SnackbarScreenshotTests {
                         NiaTheme {
                             val appState = rememberNiaAppState(
                                 networkMonitor = networkMonitor,
+                                bookmarksNavigator = bookmarksNavigator,
                                 userNewsResourceRepository = userNewsResourceRepository,
                                 timeZoneMonitor = timeZoneMonitor,
                             )

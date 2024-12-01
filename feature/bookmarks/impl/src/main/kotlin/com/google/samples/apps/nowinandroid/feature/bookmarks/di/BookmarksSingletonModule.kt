@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.nowinandroid.feature.bookmarks.di
 
-import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigationImpl
+import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigatorImpl
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import dagger.Module
 import dagger.Provides
@@ -28,6 +28,6 @@ import dagger.hilt.components.SingletonComponent
 internal interface BookmarksSingletonModule {
     companion object {
         @Provides
-        fun provideBookmarksNavigator(): BookmarksNavigator = BookmarksNavigationImpl()
+        fun provideBookmarksNavigator(): BookmarksNavigator = BookmarksNavigatorImpl()
     }
 }
