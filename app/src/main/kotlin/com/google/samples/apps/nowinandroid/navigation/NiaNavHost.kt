@@ -20,8 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
+import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksRoute
+import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseRoute
-import com.google.samples.apps.nowinandroid.feature.foryou.navigation.forYouSection
 import com.google.samples.apps.nowinandroid.feature.interests.navigation.navigateToInterests
 import com.google.samples.apps.nowinandroid.feature.search.navigation.searchScreen
 import com.google.samples.apps.nowinandroid.feature.topic.navigation.navigateToTopic
@@ -49,16 +50,22 @@ fun NiaNavHost(
         startDestination = ForYouBaseRoute,
         modifier = modifier,
     ) {
-        forYouSection(
-            onTopicClick = navController::navigateToTopic,
-        ) {
-            topicScreen(
-                showBackButton = true,
-                onBackClick = navController::popBackStack,
+        appState.niaNavigator.getNavigator<ForYouBaseNavigator>(ForYouBaseRoute::class.java).screen(
+            navGraphBuilder = this,
+            navController = navController,
+            actions = ForYouBaseNavigator.Actions(
                 onTopicClick = navController::navigateToTopic,
-            )
-        }
-        appState.bookmarksNavigator.screen(
+                topicDestination = {
+                    topicScreen(
+                        showBackButton = true,
+                        onBackClick = navController::popBackStack,
+                        onTopicClick = navController::navigateToTopic,
+                    )
+                },
+            ),
+            properties = Unit,
+        )
+        appState.niaNavigator.getNavigator<BookmarksNavigator>(BookmarksRoute::class.java).screen(
             navGraphBuilder = this,
             navController = navController,
             actions = BookmarksNavigator.Actions(

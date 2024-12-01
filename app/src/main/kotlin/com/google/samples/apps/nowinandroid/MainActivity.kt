@@ -45,8 +45,8 @@ import com.google.samples.apps.nowinandroid.core.data.util.TimeZoneMonitor
 import com.google.samples.apps.nowinandroid.core.designsystem.theme.NiaTheme
 import com.google.samples.apps.nowinandroid.core.model.data.DarkThemeConfig
 import com.google.samples.apps.nowinandroid.core.model.data.ThemeBrand
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
 import com.google.samples.apps.nowinandroid.core.ui.LocalTimeZone
-import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.ui.NiaApp
 import com.google.samples.apps.nowinandroid.ui.rememberNiaAppState
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
     lateinit var userNewsResourceRepository: UserNewsResourceRepository
 
     @Inject
-    lateinit var bookmarksNavigator: BookmarksNavigator
+    lateinit var niaNavigator: NiaNavigator
 
     private val viewModel: MainActivityViewModel by viewModels()
 
@@ -134,7 +134,7 @@ class MainActivity : ComponentActivity() {
 
             val appState = rememberNiaAppState(
                 networkMonitor = networkMonitor,
-                bookmarksNavigator = bookmarksNavigator,
+                niaNavigator = niaNavigator,
                 userNewsResourceRepository = userNewsResourceRepository,
                 timeZoneMonitor = timeZoneMonitor,
             )

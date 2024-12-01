@@ -36,8 +36,8 @@ import com.google.samples.apps.nowinandroid.core.data.repository.UserNewsResourc
 import com.google.samples.apps.nowinandroid.core.data.util.NetworkMonitor
 import com.google.samples.apps.nowinandroid.core.data.util.TimeZoneMonitor
 import com.google.samples.apps.nowinandroid.core.designsystem.theme.NiaTheme
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
 import com.google.samples.apps.nowinandroid.core.testing.util.DefaultRoborazziOptions
-import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.uitesthiltmanifest.HiltComponentActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -95,7 +95,7 @@ class NiaAppScreenSizesScreenshotTests {
     lateinit var userNewsResourceRepository: UserNewsResourceRepository
 
     @Inject
-    lateinit var bookmarksNavigator: BookmarksNavigator
+    lateinit var niaNavigator: NiaNavigator
 
     @Before
     fun setup() {
@@ -129,7 +129,7 @@ class NiaAppScreenSizesScreenshotTests {
                     NiaTheme {
                         val fakeAppState = rememberNiaAppState(
                             networkMonitor = networkMonitor,
-                            bookmarksNavigator = bookmarksNavigator,
+                            niaNavigator = niaNavigator,
                             userNewsResourceRepository = userNewsResourceRepository,
                             timeZoneMonitor = timeZoneMonitor,
                         )

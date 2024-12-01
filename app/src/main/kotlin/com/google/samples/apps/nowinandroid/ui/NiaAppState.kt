@@ -32,6 +32,7 @@ import androidx.tracing.trace
 import com.google.samples.apps.nowinandroid.core.data.repository.UserNewsResourceRepository
 import com.google.samples.apps.nowinandroid.core.data.util.NetworkMonitor
 import com.google.samples.apps.nowinandroid.core.data.util.TimeZoneMonitor
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
 import com.google.samples.apps.nowinandroid.core.ui.TrackDisposableJank
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksRoute
@@ -53,7 +54,7 @@ import kotlinx.datetime.TimeZone
 @Composable
 fun rememberNiaAppState(
     networkMonitor: NetworkMonitor,
-    bookmarksNavigator: BookmarksNavigator,
+    niaNavigator: NiaNavigator,
     userNewsResourceRepository: UserNewsResourceRepository,
     timeZoneMonitor: TimeZoneMonitor,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
@@ -62,7 +63,7 @@ fun rememberNiaAppState(
     NavigationTrackingSideEffect(navController)
     return remember(
         navController,
-        bookmarksNavigator,
+        niaNavigator,
         coroutineScope,
         networkMonitor,
         userNewsResourceRepository,
@@ -70,7 +71,7 @@ fun rememberNiaAppState(
     ) {
         NiaAppState(
             navController = navController,
-            bookmarksNavigator = bookmarksNavigator,
+            niaNavigator = niaNavigator,
             coroutineScope = coroutineScope,
             networkMonitor = networkMonitor,
             userNewsResourceRepository = userNewsResourceRepository,
@@ -82,7 +83,7 @@ fun rememberNiaAppState(
 @Stable
 class NiaAppState(
     val navController: NavHostController,
-    val bookmarksNavigator: BookmarksNavigator,
+    val niaNavigator: NiaNavigator,
     coroutineScope: CoroutineScope,
     networkMonitor: NetworkMonitor,
     userNewsResourceRepository: UserNewsResourceRepository,
@@ -162,7 +163,7 @@ class NiaAppState(
 
             when (topLevelDestination) {
                 FOR_YOU -> navController.navigateToForYou(topLevelNavOptions)
-                BOOKMARKS -> bookmarksNavigator.navigateToRoute(
+                BOOKMARKS -> niaNavigator.getNavigator<BookmarksNavigator>(BookmarksRoute::class.java).navigateToRoute(
                     navController = navController,
                     route = BookmarksRoute,
                     navOptions = topLevelNavOptions
