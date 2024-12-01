@@ -24,11 +24,11 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.navDeepLink
 import com.google.samples.apps.nowinandroid.core.notifications.DEEP_LINK_URI_PATTERN
 import com.google.samples.apps.nowinandroid.feature.foryou.ForYouScreen
+import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator.Actions
 import kotlinx.serialization.Serializable
 
 @Serializable data object ForYouRoute // route to ForYou screen
 
-@Serializable data object ForYouBaseRoute // route to base navigation graph
 
 fun NavController.navigateToForYou(navOptions: NavOptions) = navigate(route = ForYouRoute, navOptions)
 
@@ -61,5 +61,51 @@ fun NavGraphBuilder.forYouSection(
             ForYouScreen(onTopicClick)
         }
         topicDestination()
+    }
+}
+
+internal class ForYouBaseNavigatorImpl : ForYouBaseNavigator {
+    override fun navigateToRoute(
+        navController: NavController,
+        route: ForYouBaseRoute,
+        navOptions: NavOptions?,
+    ) {
+        navController.navigate(route, navOptions)
+    }
+
+    override fun screen(
+        navController: NavController,
+        navGraphBuilder: NavGraphBuilder,
+        actions: Actions,
+        properties: Unit,
+    ) {
+        with (navGraphBuilder) {
+            navigation<ForYouBaseRoute>(startDestination = ForYouRoute) {
+                composable<ForYouRoute>(
+                    deepLinks = listOf(
+                        navDeepLink {
+                            /**
+                             * This destination has a deep link that enables a specific news resource to be
+                             * opened from a notification (@see SystemTrayNotifier for more). The news resource
+                             * ID is sent in the URI rather than being modelled in the route type because it's
+                             * transient data (stored in SavedStateHandle) that is cleared after the user has
+                             * opened the news resource.
+                             */
+                            /**
+                             * This destination has a deep link that enables a specific news resource to be
+                             * opened from a notification (@see SystemTrayNotifier for more). The news resource
+                             * ID is sent in the URI rather than being modelled in the route type because it's
+                             * transient data (stored in SavedStateHandle) that is cleared after the user has
+                             * opened the news resource.
+                             */
+                            uriPattern = DEEP_LINK_URI_PATTERN
+                        },
+                    ),
+                ) {
+                    ForYouScreen(actions.onTopicClick)
+                }
+                actions.topicDestination(this)
+            }
+        }
     }
 }
