@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.core.navigation
+package com.google.samples.apps.nowinandroid.di
 
-import androidx.compose.runtime.Stable
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
+import com.google.samples.apps.nowinandroid.navigation.NiaNavigatorImpl
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-@Stable
-interface NiaNavigator {
-    fun <T: NiaBaseNavigator<out Any, out Any, out Any>> getNavigator(clazz: Class<*>): T
+@Module
+@InstallIn(SingletonComponent::class)
+internal interface NavigationSingletonModule {
+    @Binds
+    fun bindNiaNavigator(niaNavigatorImpl: NiaNavigatorImpl): NiaNavigator
 }
