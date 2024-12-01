@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,7 @@
 
 package com.google.samples.apps.nowinandroid.feature.bookmarks.navigation
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import com.google.samples.apps.nowinandroid.feature.bookmarks.BookmarksRoute
+import kotlinx.serialization.Serializable
 
-fun NavController.navigateToBookmarks(navOptions: NavOptions) =
-    navigate(route = BookmarksRoute, navOptions)
-
-fun NavGraphBuilder.bookmarksScreen(
-    onTopicClick: (String) -> Unit,
-    onShowSnackbar: suspend (String, String?) -> Boolean,
-) {
-    composable<BookmarksRoute> {
-        BookmarksRoute(onTopicClick, onShowSnackbar)
-    }
-}
+@Serializable
+object BookmarksRoute
