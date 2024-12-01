@@ -17,11 +17,11 @@
 package com.google.samples.apps.nowinandroid.feature.bookmarks.navigation
 
 import androidx.compose.runtime.Stable
-import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
+import com.google.samples.apps.nowinandroid.core.navigation.NiaBaseNavigator
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator.Actions
 
 @Stable
-interface BookmarksNavigator: NiaNavigator<BookmarksRoute, Actions, Unit> {
+interface BookmarksNavigator: NiaBaseNavigator<BookmarksRoute, Actions, Unit> {
     data class Actions(
         val onTopicClick: (String) -> Unit,
         val onShowSnackbar: suspend (String, String?) -> Boolean,

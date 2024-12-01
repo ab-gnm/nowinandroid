@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 
-interface NiaNavigator<Route, Actions, Properties> {
+interface NiaBaseNavigator<Route, Actions, Properties> {
     fun navigateToRoute(
         navController: NavController,
         route: Route,

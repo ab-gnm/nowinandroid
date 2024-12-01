@@ -17,7 +17,7 @@
 package com.google.samples.apps.nowinandroid.feature.foryou.navigation
 
 import androidx.navigation.NavGraphBuilder
-import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
+import com.google.samples.apps.nowinandroid.core.navigation.NiaBaseNavigator
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator.Actions
 import kotlinx.serialization.Serializable
 
@@ -26,7 +26,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object ForYouBaseRoute // route to base navigation graph
 
-interface ForYouBaseNavigator: NiaNavigator<ForYouBaseRoute, Actions, Unit> {
+interface ForYouBaseNavigator: NiaBaseNavigator<ForYouBaseRoute, Actions, Unit> {
     data class Actions(
         val onTopicClick: (String) -> Unit,
         val topicDestination: (NavGraphBuilder) -> Unit,
