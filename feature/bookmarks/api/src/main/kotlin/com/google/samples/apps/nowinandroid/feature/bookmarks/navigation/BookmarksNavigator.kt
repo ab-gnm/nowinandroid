@@ -20,9 +20,14 @@ import androidx.compose.runtime.Stable
 import com.google.samples.apps.nowinandroid.core.navigation.NiaBaseNavigator
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator.Actions
 
-@Stable
+/**
+ * Navigator for the bookmarks feature.
+ */
 interface BookmarksNavigator: NiaBaseNavigator<BookmarksRoute, Actions, Unit> {
-    data class Actions(
+    /**
+     * Actions hoisted up from Bookmarks screen.
+     */
+    class Actions(
         val onTopicClick: (String) -> Unit,
         val onShowSnackbar: suspend (String, String?) -> Boolean,
     )

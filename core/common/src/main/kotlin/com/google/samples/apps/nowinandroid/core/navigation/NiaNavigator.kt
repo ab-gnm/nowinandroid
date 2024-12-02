@@ -16,9 +16,10 @@
 
 package com.google.samples.apps.nowinandroid.core.navigation
 
-import androidx.compose.runtime.Stable
-
-@Stable
+/**
+ * Provides [NiaBaseNavigator] instances for routes/destinations.
+ * Individual [NiaBaseNavigator] instances can then be used to create or navigate to destinations.
+ */
 interface NiaNavigator {
     fun <T: NiaBaseNavigator<out Any, out Any, out Any>> getNavigator(clazz: Class<T>): T
 }

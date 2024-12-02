@@ -36,7 +36,8 @@ import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
 import com.google.samples.apps.nowinandroid.core.ui.TrackDisposableJank
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksRoute
-import com.google.samples.apps.nowinandroid.feature.foryou.navigation.navigateToForYou
+import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator
+import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseRoute
 import com.google.samples.apps.nowinandroid.feature.interests.navigation.navigateToInterests
 import com.google.samples.apps.nowinandroid.feature.search.navigation.navigateToSearch
 import com.google.samples.apps.nowinandroid.navigation.TopLevelDestination
@@ -162,15 +163,23 @@ class NiaAppState(
             }
 
             when (topLevelDestination) {
-                FOR_YOU -> navController.navigateToForYou(topLevelNavOptions)
-                BOOKMARKS -> niaNavigator.getNavigator<BookmarksNavigator>(BookmarksRoute::class.java).navigateToRoute(
-                    navController = navController,
-                    route = BookmarksRoute,
-                    navOptions = topLevelNavOptions
-                )
+                FOR_YOU -> niaNavigator.getNavigator(ForYouBaseNavigator::class.java)
+                    .navigateToRoute(
+                        navController = navController,
+                        route = ForYouBaseRoute,
+                        navOptions = topLevelNavOptions,
+                    )
+
+                BOOKMARKS -> niaNavigator.getNavigator(BookmarksNavigator::class.java)
+                    .navigateToRoute(
+                        navController = navController,
+                        route = BookmarksRoute,
+                        navOptions = topLevelNavOptions,
+                    )
+
                 INTERESTS -> navController.navigateToInterests(
                     initialTopicId = null,
-                    navOptions = topLevelNavOptions
+                    navOptions = topLevelNavOptions,
                 )
             }
         }

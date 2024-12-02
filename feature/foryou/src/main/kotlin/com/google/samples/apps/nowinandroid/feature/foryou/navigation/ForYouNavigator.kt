@@ -26,8 +26,16 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object ForYouBaseRoute // route to base navigation graph
 
+/**
+ * Navigator for the ForYou feature.
+ */
 interface ForYouBaseNavigator: NiaBaseNavigator<ForYouBaseRoute, Actions, Unit> {
-    data class Actions(
+    /**
+     * Actions & slots hoisted up from ForYou screen.
+     * @property onTopicClick - Called when a topic is clicked, contains the ID of the topic
+     * @property topicDestination - Destination for topic content
+     */
+    class Actions(
         val onTopicClick: (String) -> Unit,
         val topicDestination: (NavGraphBuilder) -> Unit,
     )
