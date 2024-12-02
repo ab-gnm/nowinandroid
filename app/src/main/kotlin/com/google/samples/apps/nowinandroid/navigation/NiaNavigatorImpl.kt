@@ -18,18 +18,13 @@ package com.google.samples.apps.nowinandroid.navigation
 
 import com.google.samples.apps.nowinandroid.core.navigation.NiaBaseNavigator
 import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
-import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksRoute
-import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseRoute
 import javax.inject.Inject
 
 internal class NiaNavigatorImpl @Inject constructor(
+    // Key should be the Class for the navigator, value should be the navigator instance itself
     private val navigators: Map<@JvmSuppressWildcards Class<*>, @JvmSuppressWildcards NiaBaseNavigator<*, *, *>>,
 ): NiaNavigator {
-    override fun <T : NiaBaseNavigator<out Any, out Any, out Any>> getNavigator(clazz: Class<*>): T {
-        return when (clazz) {
-            BookmarksRoute::class.java -> navigators[clazz] as T
-            ForYouBaseRoute::class.java -> navigators[clazz] as T
-            else -> error("Navigator not found for class $clazz")
-        }
+    override fun <T : NiaBaseNavigator<out Any, out Any, out Any>> getNavigator(clazz: Class<T>): T {
+        return navigators[clazz] as T
     }
 }

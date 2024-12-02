@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
-import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksRoute
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseRoute
 import com.google.samples.apps.nowinandroid.feature.interests.navigation.navigateToInterests
@@ -50,7 +49,7 @@ fun NiaNavHost(
         startDestination = ForYouBaseRoute,
         modifier = modifier,
     ) {
-        appState.niaNavigator.getNavigator<ForYouBaseNavigator>(ForYouBaseRoute::class.java).screen(
+        appState.niaNavigator.getNavigator(ForYouBaseNavigator::class.java).screen(
             navGraphBuilder = this,
             navController = navController,
             actions = ForYouBaseNavigator.Actions(
@@ -65,7 +64,7 @@ fun NiaNavHost(
             ),
             properties = Unit,
         )
-        appState.niaNavigator.getNavigator<BookmarksNavigator>(BookmarksRoute::class.java).screen(
+        appState.niaNavigator.getNavigator(BookmarksNavigator::class.java).screen(
             navGraphBuilder = this,
             navController = navController,
             actions = BookmarksNavigator.Actions(

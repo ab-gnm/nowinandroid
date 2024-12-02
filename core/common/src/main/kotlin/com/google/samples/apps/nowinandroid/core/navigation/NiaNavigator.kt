@@ -20,5 +20,5 @@ import androidx.compose.runtime.Stable
 
 @Stable
 interface NiaNavigator {
-    fun <T: NiaBaseNavigator<out Any, out Any, out Any>> getNavigator(clazz: Class<*>): T
+    fun <T: NiaBaseNavigator<out Any, out Any, out Any>> getNavigator(clazz: Class<T>): T
 }
