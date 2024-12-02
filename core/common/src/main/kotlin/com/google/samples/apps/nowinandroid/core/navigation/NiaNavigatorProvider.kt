@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.feature.bookmarks.navigation
-
-import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
-import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator.Actions
+package com.google.samples.apps.nowinandroid.core.navigation
 
 /**
- * Navigator for the bookmarks feature.
+ * Provides [NiaNavigator] instances for routes/destinations.
+ * Individual [NiaNavigator] instances can then be used to create or navigate to destinations.
  */
-interface BookmarksNavigator: NiaNavigator<BookmarksRoute, Actions, Unit> {
-    /**
-     * Actions hoisted up from Bookmarks screen.
-     */
-    class Actions(
-        val onTopicClick: (String) -> Unit,
-        val onShowSnackbar: suspend (String, String?) -> Boolean,
-    )
+interface NiaNavigatorProvider {
+    fun <T: NiaNavigator<out Any, out Any, out Any>> get(clazz: Class<T>): T
 }

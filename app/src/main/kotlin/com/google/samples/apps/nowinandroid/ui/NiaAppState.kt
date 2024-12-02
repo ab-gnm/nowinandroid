@@ -32,11 +32,11 @@ import androidx.tracing.trace
 import com.google.samples.apps.nowinandroid.core.data.repository.UserNewsResourceRepository
 import com.google.samples.apps.nowinandroid.core.data.util.NetworkMonitor
 import com.google.samples.apps.nowinandroid.core.data.util.TimeZoneMonitor
-import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigatorProvider
 import com.google.samples.apps.nowinandroid.core.ui.TrackDisposableJank
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksRoute
-import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator
+import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouNavigator
 import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseRoute
 import com.google.samples.apps.nowinandroid.feature.interests.navigation.navigateToInterests
 import com.google.samples.apps.nowinandroid.feature.search.navigation.navigateToSearch
@@ -55,7 +55,7 @@ import kotlinx.datetime.TimeZone
 @Composable
 fun rememberNiaAppState(
     networkMonitor: NetworkMonitor,
-    niaNavigator: NiaNavigator,
+    navigatorProvider: NiaNavigatorProvider,
     userNewsResourceRepository: UserNewsResourceRepository,
     timeZoneMonitor: TimeZoneMonitor,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
@@ -64,7 +64,7 @@ fun rememberNiaAppState(
     NavigationTrackingSideEffect(navController)
     return remember(
         navController,
-        niaNavigator,
+        navigatorProvider,
         coroutineScope,
         networkMonitor,
         userNewsResourceRepository,
@@ -72,7 +72,7 @@ fun rememberNiaAppState(
     ) {
         NiaAppState(
             navController = navController,
-            niaNavigator = niaNavigator,
+            navigatorProvider = navigatorProvider,
             coroutineScope = coroutineScope,
             networkMonitor = networkMonitor,
             userNewsResourceRepository = userNewsResourceRepository,
@@ -84,7 +84,7 @@ fun rememberNiaAppState(
 @Stable
 class NiaAppState(
     val navController: NavHostController,
-    val niaNavigator: NiaNavigator,
+    val navigatorProvider: NiaNavigatorProvider,
     coroutineScope: CoroutineScope,
     networkMonitor: NetworkMonitor,
     userNewsResourceRepository: UserNewsResourceRepository,
@@ -163,14 +163,14 @@ class NiaAppState(
             }
 
             when (topLevelDestination) {
-                FOR_YOU -> niaNavigator.getNavigator(ForYouBaseNavigator::class.java)
+                FOR_YOU -> navigatorProvider.get(ForYouNavigator::class.java)
                     .navigateToRoute(
                         navController = navController,
                         route = ForYouBaseRoute,
                         navOptions = topLevelNavOptions,
                     )
 
-                BOOKMARKS -> niaNavigator.getNavigator(BookmarksNavigator::class.java)
+                BOOKMARKS -> navigatorProvider.get(BookmarksNavigator::class.java)
                     .navigateToRoute(
                         navController = navController,
                         route = BookmarksRoute,

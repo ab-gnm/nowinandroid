@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.nowinandroid.feature.bookmarks.di
 
-import com.google.samples.apps.nowinandroid.core.navigation.NiaBaseNavigator
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigator
 import com.google.samples.apps.nowinandroid.feature.bookmarks.navigation.BookmarksNavigatorImpl
 import dagger.Binds
@@ -32,7 +32,7 @@ import dagger.multibindings.IntoMap
 internal interface BookmarksSingletonModule {
     @Binds
     @IntoMap @ClassKey(BookmarksNavigator::class)
-    fun bindsBookmarksNavigator(impl: BookmarksNavigator): NiaBaseNavigator<*, * , *>
+    fun bindsBookmarksNavigator(impl: BookmarksNavigator): NiaNavigator<*, * , *>
 
     companion object {
         @Provides

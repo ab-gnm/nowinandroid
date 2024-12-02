@@ -24,12 +24,12 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.navDeepLink
 import com.google.samples.apps.nowinandroid.core.notifications.DEEP_LINK_URI_PATTERN
 import com.google.samples.apps.nowinandroid.feature.foryou.ForYouScreen
-import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator.Actions
+import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouNavigator.Actions
 import kotlinx.serialization.Serializable
 
 @Serializable data object ForYouRoute // route to ForYou screen
 
-internal class ForYouBaseNavigatorImpl : ForYouBaseNavigator {
+internal class ForYouNavigatorImpl : ForYouNavigator {
     override fun navigateToRoute(
         navController: NavController,
         route: ForYouBaseRoute,

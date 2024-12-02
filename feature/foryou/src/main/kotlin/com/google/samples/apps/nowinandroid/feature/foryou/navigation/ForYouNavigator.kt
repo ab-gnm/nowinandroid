@@ -17,8 +17,8 @@
 package com.google.samples.apps.nowinandroid.feature.foryou.navigation
 
 import androidx.navigation.NavGraphBuilder
-import com.google.samples.apps.nowinandroid.core.navigation.NiaBaseNavigator
-import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouBaseNavigator.Actions
+import com.google.samples.apps.nowinandroid.core.navigation.NiaNavigator
+import com.google.samples.apps.nowinandroid.feature.foryou.navigation.ForYouNavigator.Actions
 import kotlinx.serialization.Serializable
 
 // Assume that this file lives in `:api` module
@@ -29,7 +29,7 @@ data object ForYouBaseRoute // route to base navigation graph
 /**
  * Navigator for the ForYou feature.
  */
-interface ForYouBaseNavigator: NiaBaseNavigator<ForYouBaseRoute, Actions, Unit> {
+interface ForYouNavigator: NiaNavigator<ForYouBaseRoute, Actions, Unit> {
     /**
      * Actions & slots hoisted up from ForYou screen.
      * @property onTopicClick - Called when a topic is clicked, contains the ID of the topic
